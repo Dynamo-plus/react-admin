@@ -16,7 +16,10 @@ import {
     useGetList,
 } from 'ra-core';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
-import englishMessages from 'ra-language-english';
+import {
+    default as defaultMessages,
+    default as englishMessages,
+} from 'ra-language-english';
 import * as React from 'react';
 
 import { AdminContext } from '../AdminContext';
@@ -461,9 +464,12 @@ export const FetchChoices = () => {
     };
     return (
         <TestMemoryRouter initialEntries={['/books/1']}>
-            <AdminContext dataProvider={dataProviderWithAuthors}>
+            <AdminContext
+                dataProvider={dataProviderWithAuthors}
+                i18nProvider={polyglotI18nProvider(() => defaultMessages, 'en')}
+                defaultTheme="light"
+            >
                 <AdminUI>
-                    {' '}
                     <Resource
                         name="authors"
                         recordRepresentation={record =>
@@ -496,14 +502,18 @@ export const FetchChoices = () => {
 
 export const InsideReferenceInput = () => (
     <TestMemoryRouter initialEntries={['/books/1']}>
-        <AdminContext dataProvider={dataProviderWithAuthors}>
-            <Resource
-                name="authors"
-                recordRepresentation={record =>
-                    `${record.first_name} ${record.last_name}`
-                }
-            />
+        <AdminContext
+            dataProvider={dataProviderWithAuthors}
+            i18nProvider={polyglotI18nProvider(() => defaultMessages, 'en')}
+            defaultTheme="light"
+        >
             <AdminUI>
+                <Resource
+                    name="authors"
+                    recordRepresentation={record =>
+                        `${record.first_name} ${record.last_name}`
+                    }
+                />
                 <Resource
                     name="books"
                     edit={() => (
@@ -552,6 +562,8 @@ export const InsideReferenceInputDefaultValue = ({
                         },
                     }),
             }}
+            i18nProvider={polyglotI18nProvider(() => defaultMessages, 'en')}
+            defaultTheme="light"
         >
             <AdminUI>
                 <Resource
@@ -595,6 +607,8 @@ export const InsideReferenceInputWithError = () => (
                         new Error('Error while fetching the authors')
                     ),
             }}
+            i18nProvider={polyglotI18nProvider(() => defaultMessages, 'en')}
+            defaultTheme="light"
         >
             <AdminUI>
                 <Resource
@@ -685,7 +699,11 @@ export const InsideReferenceInputWithCreationSupport = () => {
     };
     return (
         <TestMemoryRouter initialEntries={['/books/1']}>
-            <AdminContext dataProvider={dataProviderWithAuthors}>
+            <AdminContext
+                dataProvider={dataProviderWithAuthors}
+                i18nProvider={polyglotI18nProvider(() => defaultMessages, 'en')}
+                defaultTheme="light"
+            >
                 <AdminUI>
                     <Resource
                         name="authors"
