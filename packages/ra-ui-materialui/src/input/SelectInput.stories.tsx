@@ -669,7 +669,7 @@ export const InsideReferenceInputWithCreationSupport = () => {
                 <Resource
                     name="authors"
                     recordRepresentation={record =>
-                        `${record.first_name} ${record.last_name} toto`
+                        `${record.first_name} ${record.last_name}`
                     }
                 />
                 <Resource
